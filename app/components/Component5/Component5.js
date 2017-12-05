@@ -5,7 +5,8 @@ import {
     View,
     AppRegistry,
     ListView,
-    StyleSheet
+    StyleSheet,
+    TouchableHighlight,
 } from 'react-native';
 
 export default class Component5 extends Component {
@@ -17,6 +18,10 @@ export default class Component5 extends Component {
             userDataSource: ds,
         };
     }
+
+    static navigationOptions = {
+        title: 'User List',
+    };
 
     componentDidMount()
     {
@@ -35,10 +40,13 @@ export default class Component5 extends Component {
 
     renderRow(user)
     {
+        const { navigate } = this.props.navigation;
         return(
-            <View style={styles.row}>
-                <Text style={styles.rowText}>{user.name}: {user.email}</Text>
-            </View>
+            <TouchableHighlight onPress={() => navigate('UserDetails', {user: user})}>
+                <View style={styles.row}>
+                    <Text style={styles.rowText}>{user.name}: {user.email}</Text>
+                </View>
+            </TouchableHighlight>
         )
     }
 
